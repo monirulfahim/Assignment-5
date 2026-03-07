@@ -1,0 +1,42 @@
+<!doctype html>
+<html class="bg-[#F8FAFC]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind + Daisy UI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+    </style>
+  </head>
+  <body class="min-h-screen max-w-[520px] bg-[#FFFFFF] mx-auto mt-[78.5px] mb-[78.5px] rounded-lg shadow-xl">
+    <div class="logo p-8 flex flex-col justify-center items-center text-center">
+        <img class="mb-6" src="./assets/github-logo.png" alt="">
+        <h1 class="font-semibold text-2xl">GitHub Issues Tracker</h1>
+        <p class="font-normal text-[#64748B]">Sign in to manage your issues</p>
+    </div>
+    <fieldset class="fieldset flex flex-col w-100% p-8">
+
+  <label class="label font-medium text-xl text-black">Username</label>
+  <input type="username" class="input w-full p-4 text-[18px] text-[#64748B] py-6" placeholder="Enter Username" />
+  <span class="text-[#4A00FF] mb-2.5 text-[16px]">Default: admin</span>
+  <label class="label font-medium text-xl text-black">Password</label>
+  <input type="password" class="input w-full p-4 text-[18px] text-[#64748B] py-6" placeholder="Enter Password" />
+  <span class="text-[#4A00FF] text-[16px]">Default: admin123</span>
+
+  <button class="btn btn-primary mt-4 p-4 text-[16px] py-6 rounded-lg">Sign In</button>
+</fieldset>
+<div class="flex items-center border-gray-300">
+    <hr class="grow border-gray-300">
+    <span>OR</span>
+    <hr class="grow border-gray-300">
+</div>
+<div class="flex flex-col justify-center items-center p-8">
+    <div class="mb-2">Demo Credentials:</div>
+    <div class="bg-[#F8FAFC] p-6 w-full text-center">
+        <p>Username: admin</p>
+        <p>Password: admin123</p>
+    </div>
+</div>
+  </body>
+</html>
