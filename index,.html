@@ -1,8 +1,11 @@
 <!doctype html>
-<html class="bg-[#F8FAFC]">
+<html class="bg-[#F8FAFC] px-[230px] py-[50px]">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <!-- Tailwind + Daisy UI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -18,13 +21,13 @@
     <fieldset class="fieldset flex flex-col w-100% p-8">
 
   <label class="label font-medium text-xl text-black">Username</label>
-  <input type="username" class="input w-full p-4 text-[18px] text-[#64748B] py-6" placeholder="Enter Username" />
+  <input id="input-username" type="username" class="input w-full p-4 text-[18px] text-[#64748B] py-6" value="admin" placeholder="Enter Username" />
   <span class="text-[#4A00FF] mb-2.5 text-[16px]">Default: admin</span>
   <label class="label font-medium text-xl text-black">Password</label>
-  <input type="password" class="input w-full p-4 text-[18px] text-[#64748B] py-6" placeholder="Enter Password" />
+  <input id="input-password" type="password" class="input w-full p-4 text-[18px] text-[#64748B] py-6" placeholder="Enter Password" />
   <span class="text-[#4A00FF] text-[16px]">Default: admin123</span>
 
-  <button class="btn btn-primary mt-4 p-4 text-[16px] py-6 rounded-lg">Sign In</button>
+  <button id="signin-btn" class="btn btn-primary mt-4 p-4 text-[16px] py-6 rounded-lg">Sign In</button>
 </fieldset>
 <div class="flex items-center border-gray-300">
     <hr class="grow border-gray-300">
@@ -38,5 +41,6 @@
         <p>Password: admin123</p>
     </div>
 </div>
+<script src="./script/signin.js"></script>
   </body>
 </html>
