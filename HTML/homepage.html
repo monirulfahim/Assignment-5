@@ -16,7 +16,7 @@
     <header class="flex justify-between items-center px-20 py-4">
         <div class="flex gap-3 justify-center items-center">
             <div> 
-                <img class="w-14" src="./assets/github-logo.png" alt="">
+                <img class="w-14" src="../assets/github-logo.png" alt="">
             </div>
             <div> 
                 <h1 class="font-semibold text-3xl">GitHub Issues Tracker</h1>
@@ -31,7 +31,16 @@
             </div>
         </div>
     </header>
+    <main class="px-[245px] py-[60px]">
+        <div class="bg-[#FFFFFF] p-6 rounded">
+            <button onclick="toggleStyle('tab-all')" id="tab-all" class="filter-btn text-[#FFFFFF] bg-[#4A00FF]  px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300">All</button>
+            <button onclick="toggleStyle('tab-open')" id="tab-open" class="filter-btn text-[#64748B] bg-[#FFFFFF] px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300">Open</button>
+            <button onclick="toggleStyle('tab-close')" id="tab-close" class="filter-btn text-[#64748B] bg-[#FFFFFF] px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300">Close</button>
+        </div>
 
-<script src="./script/signin.js"></script>
+    </main>
+
+    <script src="../script/home.js"></script>
+    <script src="../script/signin.js"></script>
   </body>
 </html>
