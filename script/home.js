@@ -1,9 +1,14 @@
 let totalCount = document.getElementById('total');
 let issueCards = document.getElementById('all-issues');
+let statusIcon = "";
+let statusBorder = "";
+let currentStatus = "all";
+let allIssuesData = [];
 
-const allFilterBtn = document.getElementById('tab-all')
-const openFilterBtn = document.getElementById('tab-open')
-const closeFilterBtn = document.getElementById('tab-close')
+const allFilterBtn = document.getElementById('tab-all');
+const openFilterBtn = document.getElementById('tab-open');
+const closeFilterBtn = document.getElementById('tab-close');
+const searchInput =document.getElementById('search')
 
 function toggleStyle(id){
 
@@ -18,11 +23,20 @@ function toggleStyle(id){
     closeFilterBtn.classList.remove('bg-[#4A00FF]', 'text-white')
 
     const selected = document.getElementById(id);
-    currentStatus = id
+    // currentStatus = id;
+    if(id === "tab-all"){
+         currentStatus = "all"
+    }
+     else if(id === "tab-open"){
+         currentStatus = "open"
+    }
+     else{
+         currentStatus = "closed"
+    }
 
-    // adding black for selected button
     selected.classList.remove('bg-[#FFFFFF]', 'text-gray-500');
     selected.classList.add('bg-[#4A00FF]', 'text-white');
+    open();
 }
 
 const open = () => {
@@ -30,7 +44,9 @@ const open = () => {
     fetch(allUrl)
         .then((res) => res.json())
         .then((data) => {
-            displayIssues(data.data);
+            allIssuesData =data.data;
+
+            displayIssues(allIssuesData);
         })
 };
 
@@ -41,6 +57,18 @@ const displayIssues = (issues) => {
     const allIssues = document.getElementById('all-issues');
     allIssues.innerHTML="";
     issues.forEach((issue) => {
+        if(currentStatus !== "all" && issue.status !== currentStatus){
+         return;
+    }
+
+    if(issue.status === "open"){
+        statusIcon = "../assets/Open-Status.png";
+        statusBorder = "border-t-green-600";
+    }
+    else{
+        statusIcon = "../assets/close.png";
+        statusBorder = "border-t-blue-600";
+    }
         // 2.create Element
         const issueCard = document.createElement('div');
         let borderColor = "border-t-green-700";
@@ -51,12 +79,12 @@ const displayIssues = (issues) => {
     // else if(priority === "medium"){
     //     borderColor = "border-t-yellow-500"
     // }
-        issueCard.className = `p-4 bg-[#FFFFFF] rounded-xl shadow border border-gray-200 border-t-8 ${borderColor} flex flex-col h-full`;
+        issueCard.className = `p-4 bg-[#FFFFFF] rounded-xl shadow border border-gray-200 border-t-8 ${statusBorder} flex flex-col h-full`;
         issueCard.innerHTML = `
         <div class="flex flex-col h-full">
                 <div class="flex justify-between items-center mb-4">
-                    <img src="../assets/Open-Status.png" alt="">
-                    <button class="bg-[#FEECEC] rounded-[100px] px-[29px] py-1.5 text-[#EF4444] font-medium text-xl">${priority}</button>
+                    <img src="${statusIcon}" alt="">
+                    <button class="bg-[#FEECEC] rounded-[100px] px-[29px] py-1.5 text-[#EF4444] font-medium text-xl uppercase">${priority}</button>
                 </div>
                 <div class= "flex-grow">
                     <div>
@@ -64,7 +92,7 @@ const displayIssues = (issues) => {
                         <p class="text-[#64748B] text-xl mb-3">${issue.description}</p>
                     </div>
                 </div>    
-                    <div id="labels-${issue.id}" class="flex gap-2 items-center mb-2">
+                    <div id="labels-${issue.id}" class="flex gap-2 items-center mb-2 uppercase">
                         
                     </div>
             <hr class=" border-gray-300 mb-4">
@@ -82,16 +110,25 @@ const displayIssues = (issues) => {
             const labelBtn = document.createElement("button");
 
             if(label === "bug"){
-                labelBtn.className = "rounded-[100px] px-4 py-2 bg-red-100 text-red-500 border border-red-200 text-xl font-medium";
+                labelBtn.className = "rounded-[100px] px-4 py-2 bg-red-100 text-red-500 border border-red-200 text-xl font-medium uppercase";
+                labelBtn.innerHTML = `
+        <img class="inline w-4" src="../assets/BugDroid.png">
+        BUG
+        `;
             }
             else if(label === "help wanted"){
-                labelBtn.className = "rounded-[100px] px-4 py-2 bg-yellow-100 text-yellow-600 border border-yellow-200 text-xl font-medium";
+                labelBtn.className = "rounded-[100px] px-4 py-2 bg-yellow-100 text-yellow-600 border border-yellow-200 text-xl font-medium uppercase";
+                labelBtn.innerHTML = `
+        <div class= "flex justify-center items-center"> 
+            <img class=" w-3 mr-0.5" src="../assets/Lifebuoy.png">
+        <p class = "text-[16px]">HELP WANTED</p>
+        </div>
+        `;
             }
             else{
-                labelBtn.className = "rounded-[100px] px-4 py-2 bg-green-100 text-green-600 border border-green-200 text- font-medium";
+                labelBtn.className = "rounded-[100px] px-4 py-2 bg-green-100 text-green-600 border border-green-200 text- font-medium uppercase";
+                labelBtn.innerText = label;
             }
-
-            labelBtn.innerText = label;
 
             labelContainer.appendChild(labelBtn);
 
@@ -108,3 +145,23 @@ function calculateCount(){
     totalCount.innerText = issueCards.children.length;
 }
 
+allFilterBtn.addEventListener("click", () => {
+    toggleStyle("tab-all");
+})
+
+ openFilterBtn.addEventListener("click", () => {
+    toggleStyle("tab-open");
+})
+
+ closeFilterBtn.addEventListener("click", () => {
+    toggleStyle("tab-close");
+})
+
+searchInput.addEventListener("input", () => {
+ const searchText = searchInput.value.toLowerCase();
+
+const filteredIssues = allIssuesData.filter(issue =>        
+        issue.title.toLowerCase().includes(searchText)     );
+   displayIssues(filteredIssues);
+
+});

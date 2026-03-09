@@ -24,7 +24,7 @@
         </div>
         <div class="flex gap-5 justify-center items-center">
             <div> 
-                <input class="px-14 pl-2 py-2.5 text-xl rounded" type="text" placeholder="🔍 Search issues...">
+                <input id="search" class="px-14 pl-2 py-2.5 text-xl rounded" type="text" placeholder="🔍 Search issues...">
             </div>
             <div> 
                 <button class="btn btn-primary py-6 text-xl p-3 rounded font-semibold">+ New Issue</button>
@@ -35,7 +35,7 @@
         <div class="bg-[#FFFFFF] p-6 rounded mb-4">
             <button onclick="toggleStyle('tab-all')" id="tab-all" class="filter-btn text-[#FFFFFF] bg-[#4A00FF]  px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300 font-semibold">All</button>
             <button onclick="toggleStyle('tab-open')" id="tab-open" class="filter-btn text-[#64748B] bg-[#FFFFFF] px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300 font-semibold">Open</button>
-            <button onclick="toggleStyle('tab-close')" id="tab-close" class="filter-btn text-[#64748B] bg-[#FFFFFF] px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300 font-semibold">Closed</button>
+            <button onclick="toggleStyle('tab-close')" id="tab-close" class="filter-btn text-[#64748B] bg-[#FFFFFF] px-12 py-2 rounded mr-2.5 cursor-pointer border border-gray-300 font-semibold">Close</button>
         </div>
         <section>
             <div class="flex justify-between items-center p-6 bg-[#FFFFFF] rounded">
@@ -62,7 +62,7 @@
                             <img src="../assets/Ellipse 2 (1).png" alt="">
                         </div>
                         <div>
-                            Close
+                            Closed
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,6 @@
         <section id="all-issues" class="p-4 grid grid-cols-4 gap-4 items-stretch">
             
         </section>
-
     </main>
 
     <script src="../script/home.js"></script>
