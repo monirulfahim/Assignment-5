@@ -8,7 +8,14 @@ let allIssuesData = [];
 const allFilterBtn = document.getElementById('tab-all');
 const openFilterBtn = document.getElementById('tab-open');
 const closeFilterBtn = document.getElementById('tab-close');
-const searchInput =document.getElementById('search')
+const searchInput =document.getElementById('search');
+const model = document.getElementById("issueModel");
+const modelTitle = document.getElementById("modelTitle");
+const modelDescription = document.getElementById("modelDescription");
+const modelAuthor = document.getElementById("modelAuthor");
+const modelPriority = document.getElementById("modelPriority");
+const closeModel = document.getElementById("closeModel");
+const modelAssignee = document.getElementById("modelAssignee");
 
 function toggleStyle(id){
 
@@ -52,11 +59,11 @@ const open = () => {
 
 const displayIssues = (issues) => {
 
-    
     // 1.get the container
     const allIssues = document.getElementById('all-issues');
     allIssues.innerHTML="";
     issues.forEach((issue) => {
+
         if(currentStatus !== "all" && issue.status !== currentStatus){
          return;
     }
@@ -73,12 +80,34 @@ const displayIssues = (issues) => {
         const issueCard = document.createElement('div');
         let borderColor = "border-t-green-700";
         let priority = issue.priority;
-    //     if(priority === "high"){
-    //     borderColor = "border-t-red-700"
-    // }
-    // else if(priority === "medium"){
-    //     borderColor = "border-t-yellow-500"
-    // }
+        const modelLabels = document.getElementById('modelLabels');
+     issueCard.addEventListener("click", () => {
+
+    modelTitle.innerText = issue.title;
+    modelDescription.innerText = issue.description;
+    modelAuthor.innerText = issue.author;
+    modelPriority.innerText = issue.priority;
+    modelAssignee.innerText = issue.author;
+
+    modelLabels.innerHTML = "";
+
+    issue.labels.forEach(label => {
+ const labelBtn = document.createElement("span");
+
+    labelBtn.className = "px-4 py-1.5 rounded-full border border-black-500 text-sm font-medium bg-gray-100 text-gray-700";
+
+    labelBtn.innerText = label.toUpperCase();
+    
+        modelLabels.appendChild(labelBtn);
+
+    });
+
+     model.classList.remove("hidden");
+     model.classList.add("flex");
+
+});
+
+
         issueCard.className = `p-4 bg-[#FFFFFF] rounded-xl shadow border border-gray-200 border-t-8 ${statusBorder} flex flex-col h-full`;
         issueCard.innerHTML = `
         <div class="flex flex-col h-full">
@@ -164,4 +193,8 @@ const filteredIssues = allIssuesData.filter(issue =>
         issue.title.toLowerCase().includes(searchText)     );
    displayIssues(filteredIssues);
 
+});
+
+closeModel.addEventListener("click", () => {
+  model.classList.add("hidden");
 });
